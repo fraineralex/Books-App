@@ -1,0 +1,55 @@
+<main>
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="fw-light text-primary">Administrador de Libros</h1>
+                <p class="lead text-white">En este apartado puedes publicar cualquier libro,
+                    además puedes editar y/o eliminar los libros previamente publicados.</p>
+                <p>
+                    <a href="/register-book" class="btn btn-primary my-2">Publica un nuevo libro</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    {{#if hasBooks}}
+
+
+    <div class="row">
+        {{#each books}}
+
+        <div class="col mb-4" id="container-book">
+            <div class="card border border-2 border-dark"
+                style="width: 25rem; height: 34rem; background-color: var(--nav-color)">
+                <img src="{{this.imageUrl}}" class="card-img-top" style="width: auto; max-height: 48%"
+                    alt="{{this.title}}" />
+                <div class="card-body">
+                    <h4 class="card-title text-center text-primary text-bold">{{this.title}} </h4>
+                    <p class="fw-light text-white mt-3"><strong>Categoria: </strong> {{this.category.dataValues.name}}
+                    </p>
+                    <p class="fw-light text-white"><strong>Autor: </strong> {{this.author.dataValues.name}}</p>
+                    <p class="fw-light text-white"><strong>Editorial: </strong> {{this.editorial.dataValues.name}}</p>
+                    <p class="fw-light text-white"><strong>Año: </strong> {{this.yearPublished}}</p>
+                    <form class="form-delete" action="/delete-book" method="post">
+                        <input type="hidden" name="BookId" value="{{this.id}}" />
+                        <button type="submit" class="btn btn-danger float-end ms-2 mt-2 btn-delete-book">Eliminar</button>
+                    </form>
+                    <a href="/edit-book/{{this.id}}?edit=true" class="btn btn-secondary float-end mt-2">Actualizar</a>
+                </div>
+            </div>
+        </div>
+
+
+        {{/each}}
+    </div>
+
+    {{else}}
+
+    <p class=" border border-top border-white"></p>
+
+    <h1 class="text-center fw-light text-white mb-3 mt-5">Oops! :(</h1>
+
+    <h5 class="text-center lead text-white">Aún no se ha regitrado ningún libro.
+
+        {{/if}}
+</main>

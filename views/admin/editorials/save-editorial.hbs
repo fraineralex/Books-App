@@ -1,0 +1,48 @@
+<main class="mt-5 py-5">
+  <form class="row g-3 needs-validation" method="POST"
+    action="{{#if editMode}}/edit-editorial{{else}}/register-editorial{{/if}}">
+    <div class="col-8 m-md-auto">
+      <div class="card mb-5" style="background-color: var(--nav-color);">
+        <div class="card-header bg-primary text-light">
+          <h4 class="text-center">{{#if editMode}}Actualizar este{{else}}Registrar un nuevo{{/if}} editorial</h4>
+        </div>
+        <div class="card-body">
+          <div class="card-title">
+            <h4 class="text-center mb-4 text-white mt-2">Rellene todos los campos a continuación</h4>
+          </div>
+
+          <div class="mb-3">
+            <label for="name" class="form-label text-white"><strong>Nombre</strong></label>
+            <input type="text" class="form-control bg-dark text-white border-primary" id="name" name="Name"
+              value="{{#if editMode}}{{editorial.name}}{{/if}}" required />
+          </div>
+
+          <div class="mb-3">
+            <label for="phone" class="form-label text-white"><strong>Teléfono</strong></label>
+            <input type="tel" class="form-control bg-dark text-white border-primary" id="phone"
+              name="Phone" value="{{#if editMode}}{{editorial.phone}}{{/if}}" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="country" class="form-label text-white"><strong>País</strong></label>
+            <input type="text" class="form-control bg-dark text-white border-primary" id="country"
+              name="Country" value="{{#if editMode}}{{editorial.country}}{{/if}}" required>
+          </div>
+
+
+          {{#if editMode}}
+
+          <input type="hidden" name="EditorialId" value="{{editorial.id}}">
+
+          {{/if}}
+
+          <button type="submit" class="btn btn-primary float-end mt-2">{{#if
+            editMode}}Actualizar{{else}}Registrar{{/if}}</button>
+          <a href="/admin-editorials" class="btn btn-light float-end mt-2 me-2">Volver</a>
+        </div>
+      </div>
+    </div>
+  </form>
+  </div>
+  </div>
+</main>

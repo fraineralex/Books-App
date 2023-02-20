@@ -1,0 +1,49 @@
+<main>
+
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="fw-light text-primary">Administrador de Editoriales</h1>
+                <p class="lead text-white">En este apartado se muestra el listado de todos los editoriales
+                    que han producido nuestros libros, puedes registrar un nuevo editorial, y eliminar y/o editar los
+                    existentes.</p>
+                <p>
+                    <a href="/register-editorial" class="btn btn-primary my-2">Registra un nuevo editorial</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    {{#if hasEditorials}}
+
+    <div class="row">
+        {{#each editorials}}
+
+        <div class="col mb-4">
+            <div class="card bg-light" style="width: 18rem; height: auto">
+                <div class="card-body">
+                    <h5 class="card-title text-center">{{this.name}}</h5>
+                    <p class="card-text mt-3"><strong>Teléfono: </strong>{{this.phone}}</p>
+                    <p class="card-text"><strong>Pais: </strong>{{this.country}}</p>
+                    <p class="card-text"><strong>Libros asociados: </strong>{{lengthValue this.books}}</p>
+                    <form class="form-delete" action="/delete-editorial" method="post">
+                        <input type="hidden" name="EditorialId" value="{{this.id}}" />
+                        <button type="button" onclick="Confirmation('este editorial')"
+                            class="btn btn-sm btn-danger float-end ms-2 btn-delete-editorial">Eliminar</button>
+                    </form>
+                    <a href="/edit-editorial/{{this.id}}?edit=true"
+                        class="btn btn-sm btn-secondary float-end">Actualizar</a>
+                </div>
+            </div>
+        </div>
+
+        {{/each}}
+    </div>
+    {{else}}
+
+    <h1 class="text-center fw-light mb-3 mt-3 text-primary">Oops! :(</h1>
+    <h5 class="text-center lead text-white">No hay editoriales registrados todavía.</h5>
+
+    {{/if}}
+
+</main>

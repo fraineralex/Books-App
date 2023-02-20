@@ -1,0 +1,70 @@
+<main>
+
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-bold text-primary">Books Application</h1>
+        <p class="lead text-white" ><a>Encuentra tu libro favorito entre toda la variedad
+          de libros de diferentes categorias, autores y editoriales mostrados a continuación.</a></p>
+      </div>
+    </div>
+  </section>
+
+  {{#if categories}}
+  <form method="POST" action="/filter-books" class="position-absolute py-5 mt-4 top-0 end-0 custom">
+    <select class="mt-2 me-2" id="checkboxes-select" multiple name="Filter"
+      placeholder="{{#if filter}}{{#if categorySelected}}{{categorySelected}}{{else}}Prueba otra categoria{{/if}}{{else}}Filtrar por categoria{{/if}}"
+      data-search="false" data-silent-initial-value-set="true" aria-describedby="button">
+      {{#each categories as |category|}}
+      <option onChange="this.form.submit()" value="{{category.id}}">{{category.name}}</option>
+      {{/each}}
+    </select>
+
+    <button class="btn-sm btn-primary mt-2 
+      " type="submit" id="button">Filtrar</button>
+  </form>
+  {{/if}}
+
+
+  {{#if hasBooks}}
+
+
+  <div class="row">
+    {{#each books}}
+
+    <div class="col mb-4">
+      <form class="form-details" action="/book-details" method="post">
+        <div class="card border border-2 border-dark send-details effect card-2">
+          <img src="{{this.imageUrl}}" class="card-img-top" style="width: auto; max-height: 50%" alt="book" />
+          <div class="card-body mt-2">
+            <h4 class="card-title text-center text-primary">{{this.title}} </h4>
+            <p class="fw-light text-white mt-4"><strong>Categoria: </strong> {{this.category.dataValues.name}}</p>
+            <p class="fw-light text-white"><strong>Autor: </strong> {{this.author.dataValues.name}}</p>
+            <p class="fw-light text-white"><strong>Editorial: </strong> {{this.editorial.dataValues.name}}</p>
+            <p class="fw-light text-white"><strong>Año: </strong> {{this.yearPublished}}</p>
+            <input type="hidden" name="BookId" value="{{this.id}}" />
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <script src="/assets/js/toast/toastr.min.js"></script>
+    <script src="/assets/js/jQuery/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+
+    {{/each}}
+  </div>
+  {{else}}
+
+  <p class=" border border-top border-white"></p>
+
+  <h1 class="text-center fw-light mb-3 mt-5 text-white">Oops! :(</h1>
+  <h5 class="text-center lead text-white">
+    {{#if searching}} No se ha encontrado ningun libro con ese nombre{{bookTitle}}, prueba con otro libro.{{/if}}
+    {{#if filter}}No tenemos libros pertenecientes a esa categoria, prueba con otra.{{/if}}
+    {{#if default}}No hay libros registrados todavía.{{/if}}
+  </h5>
+
+  {{/if}}
+
+</main>

@@ -1,0 +1,40 @@
+<main>
+    {{#if book}}
+
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="fw-bold text-primary">Books Application</h1>
+                <p class="lead text-white">En este apartado podrás visualizar todos los detalles concernientes
+                    a este libro.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="card mb-3 mt-5 position-absolute top-50 start-50 translate-middle border-primary border-2" style="width: 950px; height:350px; background-color: var(--nav-color);">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="{{book.imageUrl}}" class="img-fluid rounded-start image" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body text-white">
+                    <h2 class="card-title text-center shadow mb-4 mt-2">{{book.title}}</h2>
+                    <p class="card-text fw-light"><strong class="fw-bold me-2">Año de publicación: </strong> {{book.yearPublished}}</p>
+                    <p class="card-text fw-light"><strong class="fw-bold me-2">Categoria: </strong> {{book.category.dataValues.name}}</p>
+                    <p class="card-text fw-light"><strong class="fw-bold me-2">Autor: </strong> {{book.author.dataValues.name}}</p>
+                    <p class="card-text fw-light"><strong class="fw-bold me-2">Editorial: </strong> {{book.editorial.dataValues.name}}</p>
+                    <p class="card-text fw-light"><strong class="fw-bold me-2">Teléfono de; editorial: </strong> {{book.editorial.dataValues.phone}}</p>
+                    <p class="card-text fw-light"><strong class="fw-bold me-2">Pais del editorial: </strong> {{book.editorial.dataValues.country}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{else}}
+
+    <h1 class="text-center fw-light mb-3 mt-3 text-primary">Oops! :(</h1>
+    <h5 class="text-center lead text-white">Algo ha salido mal, vuelve al home e intentalo nuevamente.</h5>
+
+    {{/if}}
+</main>

@@ -1,0 +1,43 @@
+<main class="mt-5 py-5">
+  <form class="row g-3 needs-validation" method="POST"
+    action="{{#if editMode}}/edit-category{{else}}/register-category{{/if}}">
+    <div class="col-8 m-md-auto">
+      <div class="card mb-5" style="background-color: var(--nav-color);">
+        <div class="card-header bg-primary text-light">
+          <h4 class="text-center">{{#if editMode}}Actualizar esta{{else}}Registrar una nueva{{/if}} categoria</h4>
+        </div>
+        <div class="card-body">
+          <div class="card-title">
+            <h4 class="text-center mb-4 text-white mt-2">Rellene todos los campos a continuación</h4>
+          </div>
+
+          <div class="mb-3">
+            <label for="name" class="form-label text-white"><strong>Nombre</strong></label>
+            <input type="text" class="form-control bg-dark text-white border-primary" id="name" name="Name"
+              value="{{#if editMode}}{{category.name}}{{/if}}" required />
+          </div>
+
+          <div class="mb-3">
+            <label for="description" class="form-label text-white"><strong>Descripción</strong></label>
+            <textarea class="form-control bg-dark text-white border-primary" rows="4" id="description"
+              name="Description" required>{{#if editMode}}{{category.description}}{{/if}}</textarea>
+          </div>
+
+
+          {{#if editMode}}
+
+          <input type="hidden" name="CategoryId" value="{{category.id}}">
+
+          {{/if}}
+
+          <button type="submit" class="btn btn-primary float-end mt-2">{{#if
+            editMode}}Actualizar{{else}}Registrar{{/if}}</button>
+
+          <a href="/admin-categories" class="btn btn-light float-end mt-2 me-2">Volver</a>
+        </div>
+      </div>
+    </div>
+  </form>
+  </div>
+  </div>
+</main>
